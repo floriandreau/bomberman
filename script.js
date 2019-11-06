@@ -6,6 +6,7 @@ function getRandomInt(max) {
 let carre = document.getElementById("carre");
 let ennemi = document.getElementById("ennemi");
 let cadre = document.getElementById("cadre");
+let vie = 3;
 
 // fonction qui permet de bouger un élément dans une direction
 function move(element, direction) {
@@ -98,52 +99,23 @@ function bombe(element) {
 
         let j = document.getElementById("carre");
         let e = document.getElementById("ennemi");
-        let left_j = parseInt(
-          window.getComputedStyle(j).getPropertyValue("left")
-        );
-        let top_j = parseInt(
-          window.getComputedStyle(j).getPropertyValue("top")
-        );
-        let left_e = parseInt(
-          window.getComputedStyle(e).getPropertyValue("left")
-        );
-        let top_e = parseInt(
-          window.getComputedStyle(e).getPropertyValue("top")
-        );
 
-
-        left_j = parseInt(window.getComputedStyle(j).getPropertyValue("left"));
-        top_j = parseInt(window.getComputedStyle(j).getPropertyValue("top"));
-        left_e = parseInt(window.getComputedStyle(e).getPropertyValue("left"));
-        top_e = parseInt(window.getComputedStyle(e).getPropertyValue("top"));
-
-
-        console.log(parseInt(e.offsetLeft)+50+" left_e");
-        console.log(parseInt(e.offsetTop)+50+" top_e");
-        console.log("-----b-------");
-        
-        console.log(parseInt(element.offsetLeft)+" left_b");
-        console.log(parseInt(element.offsetTop)+" t_b");
-        console.log("-----fin----");
-        
         if(element.offsetLeft < e.offsetLeft +50 && element.offsetLeft + 150 > e.offsetLeft&&
           element.offsetTop < e.offsetTop +50 && element.offsetTop + 150 > e.offsetTop){
 
           e.remove();
-          console.log("paf");
-          
         }
 
-    }, 3000);
+    }, 1000);
     setTimeout(function(){
         element.remove();
-    }, 4000);
+    }, 3000);
   }
 }
 
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
 window.addEventListener("keydown", function(event) {
-  
+
   switch (event.keyCode) {
     //haut
     case 38:
@@ -178,10 +150,18 @@ window.addEventListener("keydown", function(event) {
       }
     break;
   }
+  if(carre.offsetLeft == ennemi.offsetLeft && carre.offsetLeft + 50 == ennemi.offsetLeft + 50 &&
+    carre.offsetTop == ennemi.offsetTop && carre.offsetTop + 50 == ennemi.offsetTop + 50){
+      vie -= 1;
+  }
+  if (vie == 0) {
+    alert("t'es perdant loser");
+  }
 });
 
 // faire bouger l'ennemi dans une direction aléatoirement
 setInterval(function(){
+
   let random = getRandomInt(4);
 switch (random) {
   case 0:
@@ -217,7 +197,19 @@ switch (random) {
         }
     break;
 }
-},1000)
+if(carre.offsetLeft == ennemi.offsetLeft && carre.offsetLeft + 50 == ennemi.offsetLeft + 50 &&
+  carre.offsetTop == ennemi.offsetTop && carre.offsetTop + 50 == ennemi.offsetTop + 50){
+    alert("Perdu pauvre nul ! Ché !");
+    carre.remove();
+}
 
-/* Partie bombe */
+},10000)
+
+
+
+
+
+
+
+
 
