@@ -5,6 +5,7 @@ function getRandomInt(max) {
 
 let carre = document.getElementById("carre");
 let ennemi = document.getElementById("ennemi");
+let cadre = document.getElementById("cadre");
 
 // fonction qui permet de bouger un élément dans une direction
 function move(element, direction) {
@@ -55,9 +56,76 @@ function move(element, direction) {
   }
 }
 
+function bombe(element) {
+  let bomb = document.createElement("div");
+  bomb.classList.add('bombe');
+  left_element = parseInt(
+    window.getComputedStyle(element).getPropertyValue("left")
+  );
+  top_element = parseInt(
+    window.getComputedStyle(element).getPropertyValue("top")
+  );
+  bomb.style.left = left_element+"px";
+  bomb.style.top = top_element+"px";
+  cadre.appendChild(bomb);
+  let element_t = document.getElementsByClassName('bombe');
+  for (let index = 0; index < element_t.length; index++) {
+    const element = element_t[index];
+    
+    setTimeout(function(){
+        console.log(index);
+        
+        let width_bomb = parseInt(
+          window.getComputedStyle(element).getPropertyValue("width")
+        );
+        let height_bomb = parseInt(
+          window.getComputedStyle(element).getPropertyValue("height")
+        );
+        let left_bomb = parseInt(
+          window.getComputedStyle(element).getPropertyValue("left")
+        );
+        let top_bomb = parseInt(
+          window.getComputedStyle(element).getPropertyValue("top")
+        );
+        let back_bomb = window.getComputedStyle(element).getPropertyValue("background");
+        height_bomb = parseInt(window.getComputedStyle(element).getPropertyValue("height"));
+        width_bomb = parseInt(window.getComputedStyle(element).getPropertyValue("width"));
+        left_bomb = parseInt(window.getComputedStyle(element).getPropertyValue("left"));
+        top_bomb = parseInt(window.getComputedStyle(element).getPropertyValue("top"));
+        back_bomb = window.getComputedStyle(element).getPropertyValue("background")    
+        element.style.width = "150px";
+        element.style.height = "150px";
+        element.style.left = left_bomb-50+"px";
+        element.style.top = top_bomb-50+"px";
+        element.style.background = "url(explosion.gif) round";
+        setTimeout(retir_bomb, 1000);
+
+    }, 3000);
+    
+  }
+
+}
+
+function explosion() {
+  let cadre = document.getElementById('cadre');
+  let element_t = document.getElementsByClassName('bombe');
+  
+}
+
+function retir_bomb(){
+  let cadre = document.getElementById('cadre');
+  let element = document.getElementsByClassName('bombe');
+
+for (let index = 0; index < element.length; index++) {
+  const element_b = element[index];
+  element_b.remove();
+  
+}
+
+}
+
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
 window.addEventListener("keydown", function(event) {
-  console.log(event.keyCode);
   
   switch (event.keyCode) {
     //haut
@@ -85,7 +153,12 @@ window.addEventListener("keydown", function(event) {
       break;
     case 32:
       // code quand on pose la bombe
-      bombe()
+      let bombe_existe = document.getElementsByClassName("bombe");
+      if(bombe_existe.length<3){
+        bombe(carre);
+      }
+      else{ 
+      }
     break;
   }
 });
