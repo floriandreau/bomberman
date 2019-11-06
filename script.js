@@ -55,6 +55,10 @@ function move(element, direction) {
   }
 }
 
+function bombe(element) {
+  
+}
+
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
 window.addEventListener("keydown", function(event) {
   console.log(event.keyCode);
@@ -85,7 +89,7 @@ window.addEventListener("keydown", function(event) {
       break;
     case 32:
       // code quand on pose la bombe
-      bombe()
+      bombe(carre);
     break;
   }
 });
