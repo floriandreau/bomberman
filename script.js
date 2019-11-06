@@ -71,10 +71,7 @@ function bombe(element) {
   let element_t = document.getElementsByClassName('bombe');
   for (let index = 0; index < element_t.length; index++) {
     const element = element_t[index];
-    
     setTimeout(function(){
-        console.log(index);
-        
         let width_bomb = parseInt(
           window.getComputedStyle(element).getPropertyValue("width")
         );
@@ -97,31 +94,51 @@ function bombe(element) {
         element.style.height = "150px";
         element.style.left = left_bomb-50+"px";
         element.style.top = top_bomb-50+"px";
-        element.style.background = "url(explosion.gif) round";
-        setTimeout(retir_bomb, 1000);
+        element.style.background = "url(explosion"+index+".gif) round";
+
+        let j = document.getElementById("carre");
+        let e = document.getElementById("ennemi");
+        let left_j = parseInt(
+          window.getComputedStyle(j).getPropertyValue("left")
+        );
+        let top_j = parseInt(
+          window.getComputedStyle(j).getPropertyValue("top")
+        );
+        let left_e = parseInt(
+          window.getComputedStyle(e).getPropertyValue("left")
+        );
+        let top_e = parseInt(
+          window.getComputedStyle(e).getPropertyValue("top")
+        );
+
+
+        left_j = parseInt(window.getComputedStyle(j).getPropertyValue("left"));
+        top_j = parseInt(window.getComputedStyle(j).getPropertyValue("top"));
+        left_e = parseInt(window.getComputedStyle(e).getPropertyValue("left"));
+        top_e = parseInt(window.getComputedStyle(e).getPropertyValue("top"));
+
+
+        console.log(parseInt(e.offsetLeft)+50+" left_e");
+        console.log(parseInt(e.offsetTop)+50+" top_e");
+        console.log("-----b-------");
+        
+        console.log(parseInt(element.offsetLeft)+" left_b");
+        console.log(parseInt(element.offsetTop)+" t_b");
+        console.log("-----fin----");
+        
+        if(element.offsetLeft < e.offsetLeft +50 && element.offsetLeft + 150 > e.offsetLeft&&
+          element.offsetTop < e.offsetTop +50 && element.offsetTop + 150 > e.offsetTop){
+
+          e.remove();
+          console.log("paf");
+          
+        }
 
     }, 3000);
-    
+    setTimeout(function(){
+        element.remove();
+    }, 4000);
   }
-
-}
-
-function explosion() {
-  let cadre = document.getElementById('cadre');
-  let element_t = document.getElementsByClassName('bombe');
-  
-}
-
-function retir_bomb(){
-  let cadre = document.getElementById('cadre');
-  let element = document.getElementsByClassName('bombe');
-
-for (let index = 0; index < element.length; index++) {
-  const element_b = element[index];
-  element_b.remove();
-  
-}
-
 }
 
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
