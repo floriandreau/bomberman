@@ -24,7 +24,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
+  z-index: 100;
 }
 ol, ul {
 	list-style: none;
@@ -45,12 +46,14 @@ table {
 #cadre{
   height: 700px;
   width: 700px;
+  margin-left: 400px;
+  margin-top: 35px;
   background: url("herbe.png");
-  border: solid 2px black;
   position: relative;
 }
 
 #carre{
+  z-index: 100;
   height: 50px;
   width: 50px;
   background: url(sprite_final.gif) round;
@@ -76,12 +79,34 @@ table {
 }
 
 #vie {
-  width: 800px;
+  position: absolute;
+  left: 1150px;
+  top: 50px;
+  z-index: 200;
 }
 
 #popup
 {
-display: none;
+display: flex;
+position: absolute;
+z-index: 200;
+width: 700px;
+height: 700px;
+background: gray;
+top: 0;
+left: 0;
+margin: 35px 400px;
+flex-direction: column;
+align-content: center;
+justify-content: center;
+text-align: center;
+}
+
+#popup>button{
+width: 150px;
+height: 50px;
+margin-left: 40%;
+margin-top: 10%;
 }
 
 .obstacle
@@ -109,4 +134,65 @@ display: none;
   height: 50px;
   background:url("brique\ cassé.png");
   position: absolute;
+}
+
+.hide{
+  display: none !important;
+}
+
+#menu{
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#solo{
+  width: 50%;
+  height: 50%;
+  background: red;
+}
+#coop{
+  width: 50%;
+  height: 50%;
+  background: blue;
+}
+#vs{
+  width: 50%;
+  height: 50%;
+  background: green;
+}
+#all{
+  width: 50%;
+  height: 50%;
+  background: yellow;
+}
+
+.ombre{
+  z-index: 99;
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  left: -200px;
+}
+
+.cache{
+  height: 700px;
+  width: 300px;
+  position: absolute;
+  left: -300px;
+  background-color: white;
+  z-index: 100;
+}
+
+#deux{
+  z-index: 100;
+  height: 50px;
+  width: 50px;
+  /* background: url(sprite_final.gif) round; */
+  background: black;
+  position: absolute;
+  top: 300px;
+  left: 300px;
 }
