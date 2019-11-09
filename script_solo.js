@@ -13,10 +13,8 @@ let score=0;
 let div_score=document.getElementById("score");
 div_score.classList.remove("hide");
 div_score.innerHTML=" score : "+score;
-divVie.innerHTML="vie : "+vie;
-//bonus/malus
-let bonus;
-let malus;
+divVie.innerHTML="<br><br><br>vie : "+vie;
+
 
 // fonction qui permet de bouger un élément dans une direction
 function move(element, direction) {
@@ -302,13 +300,14 @@ function bombe(element) {
   bomb.style.top = top_element+"px";
   cadre.appendChild(bomb);
   let element_t = document.getElementsByClassName('bombe');
+  let position_left_bombe = element.offsetLeft;
+  let position_top_bombe = element.offsetTop;
   for (let index = 0; index < element_t.length; index++) {
     const element = element_t[index];
-    boom(element, index);
-  }
+    boom(element, index, position_left_bombe, position_top_bombe);  }
 }
 
-function boom(element, index) {
+function boom(element, index, position_left_bombe, position_top_bombe) {
   setTimeout(function(){
     let width_bomb = parseInt(
       window.getComputedStyle(element).getPropertyValue("width")
@@ -330,8 +329,15 @@ function boom(element, index) {
     back_bomb = window.getComputedStyle(element).getPropertyValue("background")    
     element.style.width = "150px";
     element.style.height = "150px";
-    element.style.left = left_bomb-50+"px";
-    element.style.top = top_bomb-50+"px";
+
+    position_top_bombe = position_top_bombe - 50;
+    position_left_bombe = position_left_bombe - 50;
+
+    if (position_top_bombe < parseInt(element.style.top) &&  position_left_bombe < parseInt(element.style.left)) {
+      
+      element.style.left = left_bomb-50+"px";
+      element.style.top = top_bomb-50+"px";
+    }
     element.style.background = "url(explosion"+index+".gif) round";
 
     let mechant = document.getElementsByClassName("ennemi");
@@ -527,25 +533,45 @@ window.addEventListener("keydown", function(event) {
     //haut
     case 38:
       //code quand on va en haut
+      carre.style.background="url(sprite_jeu_js/joueur/haut.gif)";
       move(carre, "haut");
+      setTimeout(function(){
+        carre.style.background="url(sprite_jeu_js/joueur/normal.gif)";
+
+      }, 500);
       break;
 
     //droite
     case 39:
       //code quand on va à droite
+      carre.style.background="url(sprite_jeu_js/joueur/droite.gif)";
       move(carre, "droite");
+      setTimeout(function(){
+        carre.style.background="url(sprite_jeu_js/joueur/normal.gif)";
+
+      }, 500);
       break;
 
     //bas
     case 40:
+      carre.style.background="url(sprite_jeu_js/joueur/bas.gif)";
       move(carre, "bas");
+      setTimeout(function(){
+        carre.style.background="url(sprite_jeu_js/joueur/normal.gif)";
+
+      }, 500);
       //code quand on va à bas
       break;
 
     //gauche
     case 37:
       //code quand on va à gauche
+      carre.style.background="url(sprite_jeu_js/joueur/gauche.gif)";
       move(carre, "gauche");
+      setTimeout(function(){
+        carre.style.background="url(sprite_jeu_js/joueur/normal.gif)";
+
+      }, 500);
       break;
     case 32:
       // code quand on pose la bombe
@@ -553,7 +579,12 @@ window.addEventListener("keydown", function(event) {
         
         let bombe_existe = document.getElementsByClassName("bombe");
         if(bombe_existe.length<3){
+          carre.style.background="url(sprite_jeu_js/joueur/bomb.gif)";
           bombe(carre);
+          setTimeout(function(){
+            carre.style.background="url(sprite_jeu_js/joueur/normal.gif)";
+
+          }, 500);
         }
         else{ 
         }
@@ -580,7 +611,7 @@ window.addEventListener("keydown", function(event) {
         let id_bonus = element_bonus.getAttribute('id')
         if (id_bonus == "bonus_0") {
            vie+= 1;
-           divVie.innerHTML="vie : "+vie;
+           divVie.innerHTML="<br><br><br>vie : "+vie;
            element_bonus.remove();
         }
         else if(id_bonus == "bonus_1"){
@@ -639,33 +670,47 @@ setInterval(function(){
   switch (random) {
     case 0:
       if(parseInt(window.getComputedStyle(element).getPropertyValue("top")) === 0){
+        element.style.background="url(sprite_jeu_js/sprite_ennemie/bas.gif)"
         move(element, "bas");
       }
       else{
+        element.style.background="url(sprite_jeu_js/sprite_ennemie/haut.gif)"
         move(element, "haut");
       }
       break;
       case 1:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("top")) === 650){
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/haut.gif)"
+
             move(element, "haut");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/bas.gif)"
+
             move(element, "bas");
           }
       break;
       case 2:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("left")) === 0){
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/droite.gif)"
+
             move(element, "droite");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/gauche.gif)"
+
             move(element, "gauche");
           }
       break;
       case 3:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("left")) === 650){
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/gauche.gif)"
+
             move(element, "gauche");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/droite.gif)"
+
             move(element, "droite");
           }
       break;
@@ -684,17 +729,21 @@ setInterval(function(){
   }
   
 }
-  },100000000000000)
+  },1000)
   
 function point_vie(){
  vie -= 1;
- divVie.innerHTML="vie : "+vie;
- if(vie == 0){
+ divVie.innerHTML="<br><br><br>vie : "+vie;
+ carre.style.background = "url(sprite_jeu_js/joueur/degat.gif)";
+ setTimeout(function(){
+  carre.style.background = "url(sprite_jeu_js/joueur/normal.gif)";
+ },500);
+ if(vie == 0 || vie < 0){
  let popup = document.getElementById ("popup");
  popup.classList.remove("hide") ;
  carre.remove ();
  vie = 0;
- divVie.innerHTML="vie : "+vie;
+ divVie.innerHTML="<br><br><br>vie : "+vie;
 }
 }
 function restart(){

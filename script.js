@@ -33,7 +33,6 @@ function vs() {
 }
 
 function vss() {
-  console.log('all');
   
   let vss = document.createElement("script");
   vss.setAttribute("src", "script_all.js");
