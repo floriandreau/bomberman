@@ -636,4 +636,3 @@ function nb_cassables(min,max){
     cadre.appendChild(cassable);
    }
  }
-

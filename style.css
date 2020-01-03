@@ -82,6 +82,7 @@ table {
   position: absolute;
   top: 50px;
   left: 50px;
+  z-index: 20;
 }
 
 .bombe{
@@ -271,6 +272,7 @@ margin-top: 10%;
   width: 50px;
   background: url(texture-caisse.jpeg) round;
   position: absolute;
+  z-index: 10;
 }
 
 #vie_deux {

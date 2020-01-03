@@ -7,7 +7,7 @@ cache[1].style.left = "700px";
 let carre = document.getElementById("carre");
 let ennemi = document.getElementsByClassName("ennemi");
 let cadre = document.getElementById("cadre");
-let vie = 300;
+let vie = 3;
 let divVie = document.getElementById("vie");
 let score=0; 
 let div_score=document.getElementById("score");
@@ -549,6 +549,13 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
           
           function_bonus(element_mechant.offsetLeft,element_mechant.offsetTop);
           element_mechant.remove();
+          //remettre les id à jour
+          let new_arr_ennemi = document.getElementsByClassName("ennemi");
+          for (let new_id = i; new_id < new_arr_ennemi.length; new_id++) {
+            const element = new_arr_ennemi[new_id];
+            
+            element.id=i-1
+          }
           score+=1;
           div_score.innerHTML=" score : "+score;
 
@@ -858,8 +865,9 @@ window.addEventListener("keydown", function(event) {
 
 //mouvements des ennemis
 setInterval(function(){
-    for (let i_ennemi = 0; i_ennemi < ennemi.length; i_ennemi++) {
-      const element = ennemi[i_ennemi];
+  let arr_ennemi = document.getElementsByClassName("ennemi");
+    for (let i_ennemi = 0; i_ennemi < arr_ennemi.length; i_ennemi++) {
+      const element = arr_ennemi[i_ennemi];
 
     let random = getRandomInt(4);
   switch (random) {
@@ -915,11 +923,17 @@ setInterval(function(){
   for (let i = 0; i < mechant.length; i++) {
     const element = mechant[i];
     let e = document.getElementById(i);
-    if(carre.offsetLeft < e.offsetLeft +50 && carre.offsetLeft + 50 > e.offsetLeft&&
-      carre.offsetTop < e.offsetTop +50 && carre.offsetTop + 50 > e.offsetTop 
-     ){
-     point_vie();
     
+    if (e === null) {
+      
+    }
+    else{
+      if(carre.offsetLeft < e.offsetLeft +50 && carre.offsetLeft + 50 > e.offsetLeft&&
+        carre.offsetTop < e.offsetTop +50 && carre.offsetTop + 50 > e.offsetTop 
+       ){
+       point_vie();
+      
+      }
     }
   }
   
@@ -1014,7 +1028,7 @@ function creaMechant() {
 }
   
 function function_bonus( ennemi_left, ennemi_top) {
-  console.log(ennemi_left);
+  // console.log(ennemi_left);
   
   let bonus= document.createElement("div");
   bonus.classList.add("bonus");
@@ -1023,9 +1037,19 @@ function function_bonus( ennemi_left, ennemi_top) {
   bonus.setAttribute("id","bonus_"+bonus_id);
   bonus.style.left = ennemi_left+"px";
   bonus.style.top = ennemi_top+"px";
-  console.log(bonus.style.left);
-  
+  let block = document.getElementsByClassName("obstacle");
   cadre.appendChild(bonus);
+  for (let index = 0; index < block.length; index++) {
+    const element = block[index];
+    console.log(bonus.offsetLeft);
+    
+    if (bonus.offsetLeft == element.offsetLeft && bonus.offsetTop == element.offsetTop) {
+      bonus.style.left = bonus.offsetLeft - 50 +"px";
+      console.log("pouf");
+    }
+  }
+  // console.log(bonus.style.left);
+  
 
   
 }
