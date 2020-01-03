@@ -297,6 +297,12 @@ function triple_bombe(element_left, element_top) {
 function bombe(element) {
   let bomb = document.createElement("div");
   bomb.classList.add('bombe');
+    if (element.id =="carre") {
+    bomb.classList.add('bombe_un');
+  }
+  else if (element.id == "deux") {
+    bomb.classList.add('bombe_deux');
+  }
   left_element = parseInt(
     window.getComputedStyle(element).getPropertyValue("left")
   );
@@ -383,12 +389,13 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
       point_vie_2();
     }
     let casse = document.getElementsByClassName("casse");
+    let cassable = document.getElementsByClassName("cassable");
     for (let index = 0; index < casse.length; index++) {
       const casse_touche = casse[index];
       if (element.offsetLeft < casse_touche.offsetLeft +50 && element.offsetLeft + 150 > casse_touche.offsetLeft&&
         element.offsetTop < casse_touche.offsetTop +50 && element.offsetTop + 150 > casse_touche.offsetTop) {
         casse_touche.remove();
-        if (casse.length == 0) {
+        if (casse.length == 0 && cassable.length == 0) {
           let cass_number = nb_cassables(5,30);
           for (let i = 0; i < cass_number; i++) {
             const cassable = document.createElement("div");
@@ -404,7 +411,6 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
         }
       }
     }
-    let cassable = document.getElementsByClassName("cassable");
     for (let index = 0; index < cassable.length; index++) {
       const cassable_touche = cassable[index];
       if (element.offsetLeft < cassable_touche.offsetLeft +50 && element.offsetLeft + 150 > cassable_touche.offsetLeft&&
@@ -585,7 +591,7 @@ window.addEventListener("keydown", function(event) {
       // code quand on pose la bombe
       if (vie > 0) {
         
-        let bombe_existe = document.getElementsByClassName("bombe");
+        let bombe_existe = document.getElementsByClassName("bombe_un");
         if(bombe_existe.length<3){
           carre.style.background = "url(sprite_jeu_js/joueur/bomb.gif)";
           bombe(carre);
@@ -633,10 +639,11 @@ window.addEventListener("keydown", function(event) {
         }
         else if(id_bonus == "bonus_3"){
           for (let index = 0; index < 4; index++) {
-            let triple_azar = ["0", "50", "100", "150", "200", "250", "400", "450", "500", "550", "600", "650"];
+            let triple_azar = ["0", "50", "100", "150", "200", "250",, "300", "350", "400", "450", "500", "550", "600", "650"];
             let random_pos = triple_azar[Math.floor(Math.random() * triple_azar.length)];
+            let random_pos_top = triple_azar[Math.floor(Math.random() * triple_azar.length)];
             let left_triple= random_pos;
-            let top_triple= random_pos;
+            let top_triple= random_pos_top;
             triple_bombe(left_triple, top_triple);
             element_bonus.remove();
 
@@ -716,7 +723,7 @@ window.addEventListener("keydown", function(event) {
       // code quand on pose la bombe
       if (vie_2 > 0) {
         
-        let bombe_existe = document.getElementsByClassName("bombe");
+        let bombe_existe = document.getElementsByClassName("bombe_deux");
         if(bombe_existe.length<3){
           deux.style.background = "url(sprite_jeu_js/sprite_j2/bomb.gif)"
           bombe(deux);
@@ -750,7 +757,7 @@ window.addEventListener("keydown", function(event) {
         let id_bonus = element_bonus.getAttribute('id')
         if (id_bonus == "bonus_0") {
            vie_2+= 1;
-           divVie.innerHTML="<br><br><br>vie : "+vie_2;
+           div_vie_2.innerHTML="<br><br><br>vie : "+vie_2;
            element_bonus.remove();
         }
         else if(id_bonus == "bonus_1"){
@@ -765,10 +772,11 @@ window.addEventListener("keydown", function(event) {
         }
         else if(id_bonus == "bonus_3"){
           for (let index = 0; index < 4; index++) {
-            let triple_azar = ["0", "50", "100", "150", "200", "250", "400", "450", "500", "550", "600", "650"];
+            let triple_azar = ["0", "50", "100", "150", "200", "250",, "300", "350", "400", "450", "500", "550", "600", "650"];
             let random_pos = triple_azar[Math.floor(Math.random() * triple_azar.length)];
+            let random_pos_top = triple_azar[Math.floor(Math.random() * triple_azar.length)];
             let left_triple= random_pos;
-            let top_triple= random_pos;
+            let top_triple= random_pos_top;
             triple_bombe(left_triple, top_triple);
             element_bonus.remove();
 
@@ -798,6 +806,7 @@ window.addEventListener("keydown", function(event) {
 });
 
 function point_vie_2(){
+  setTimeout(function(){
   vie_2 -= 1;
   div_vie_2.innerHTML="<br><br><br>vie : "+vie_2;
   deux.style.background = "url(sprite_jeu_js/sprite_j2/degat.gif)";
@@ -809,14 +818,16 @@ function point_vie_2(){
     deux = document.getElementById("deux").id ="deux_mort";
     vie_2 = 0;
     div_vie_2.innerHTML="<br><br><br>vie : "+vie_2;
-  }
+  };
   if(vie_2 == 0  && vie == 0){
     let popup = document.getElementById ("popup");
     popup.classList.remove("hide") ;
     deux.remove ();
     vie_2 = 0;
   div_vie_2.innerHTML="<br><br><br>vie : "+vie_2;
- }
+ };
+}, 1000);
+
  }
 
 // faire bouger l'ennemi dans une direction aléatoirement
@@ -832,33 +843,46 @@ setInterval(function(){
   switch (random) {
     case 0:
       if(parseInt(window.getComputedStyle(element).getPropertyValue("top")) === 0){
+        element.style.background="url(sprite_jeu_js/sprite_ennemie/bas.gif)"
+
         move(element, "bas");
       }
       else{
+        element.style.background="url(sprite_jeu_js/sprite_ennemie/haut.gif)"
+
         move(element, "haut");
       }
       break;
       case 1:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("top")) === 650){
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/haut.gif)"
+
             move(element, "haut");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/bas.gif)"
+
             move(element, "bas");
           }
       break;
       case 2:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("left")) === 0){
+            
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/droite.gif)"
             move(element, "droite");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/gauche.gif)"
             move(element, "gauche");
           }
       break;
       case 3:
           if(parseInt(window.getComputedStyle(element).getPropertyValue("left")) === 650){
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/gauche.gif)"
             move(element, "gauche");
           }
           else{
+            element.style.background="url(sprite_jeu_js/sprite_ennemie/droite.gif)"
             move(element, "droite");
           }
       break;
@@ -866,7 +890,6 @@ setInterval(function(){
 
   let mechant=document.getElementsByClassName("ennemi");
   for (let i = 0; i < mechant.length; i++) {
-    const element = mechant[i];
     let e = document.getElementById(i);
     if(carre.offsetLeft < e.offsetLeft +50 && carre.offsetLeft + 50 > e.offsetLeft&&
       carre.offsetTop < e.offsetTop +50 && carre.offsetTop + 50 > e.offsetTop 
@@ -874,12 +897,18 @@ setInterval(function(){
      point_vie();
     
     }
+    else if (deux.offsetLeft < e.offsetLeft +50 && deux.offsetLeft + 50 > e.offsetLeft&&
+      deux.offsetTop < e.offsetTop +50 && deux.offsetTop + 50 > e.offsetTop) {
+        point_vie_2();
+
+    }
   }
   
 }
-  },100000000000000)
+  },1000)
   
 function point_vie(){
+  setTimeout(function(){
  vie -= 1;
  divVie.innerHTML="<br><br><br>vie : "+vie;
  carre.style.background = "url(sprite_jeu_js/joueur/degat.gif)";
@@ -888,9 +917,9 @@ function point_vie(){
  },500);
  if (vie == 0 || vie < 0) {
   carre.style.background="url(sprite_jeu_js/joueur/mort.gif)";
-  carre = document.getElementById("deux").id ="deux_mort";
+  carre = document.getElementById("carre").id ="carre_mort";
   vie = 0;
-  div_vie_2.innerHTML="<br><br><br>vie : "+vie;
+  divVie.innerHTML="<br><br><br>vie : "+vie;
 }
  if(vie == 0 && vie_2 == 0){
  let popup = document.getElementById ("popup");
@@ -899,7 +928,10 @@ function point_vie(){
  vie = 0;
  divVie.innerHTML="<br><br><br>vie : "+vie;
 }
+}, 1000);
+divVie.innerHTML="<br><br><br>vie : "+vie;
 }
+
 function restart(){
 document.location.reload(true); 
 }
@@ -944,57 +976,6 @@ function nb_cassables(min,max){
    cassable.style.top = random_top_cassable+"px";
    cadre.appendChild(cassable);
  }
-
-//Création nuage
-let forme = ["1", "2"];
-let top_ombre=[ "0", "50", "100", "150", "200", "250","300","350", "400", "450", "500", "550"];
-setInterval(function(){
-  let nuage = document.createElement('div');
-  nuage.classList.add("ombre");
-  let random_ombre = forme[Math.floor(Math.random() * forme.length)];
-  let random_top = top_ombre[Math.floor(Math.random() * top_ombre.length)];
-  if (random_ombre == 1) {
-  
-
-    nuage.style.background ="url(nuage.png) round";
-    nuage.style.filter="invert()"
-    nuage.style.opacity="50%"
-    nuage.style.top = random_top+"px";
-    cadre.appendChild(nuage);
-    move_nuage(nuage);
-  }
-  else{
-  
-
-    nuage.style.background ="url(nuage.png) round";
-    nuage.style.filter="invert()"
-    nuage.style.opacity="50%"
-    nuage.style.top = random_top+"px";
-    cadre.appendChild(nuage);
-    move_nuage();
-  }
-}, 17000);
-
-function move_nuage() {
-  setInterval(function(){
-  let nuage = document.getElementsByClassName('ombre');
-  for (let index = 0; index < nuage.length; index++) {
-    const element = nuage[index];
-    
-    if (element.offsetLeft < 700) {
-
-        element.left = element.offsetLeft;
-        element.left += 50;
-        element.style.left = element.left +"px"
-      }
-      else{
-        
-        element.remove();
-      }
-    }
-  }, 2000);
-  
-}
 
 // créer une varriable nb_ennemi = 1
 let nb_ennemi = 1;

@@ -42,3 +42,6 @@ function vss() {
   vie_txt.classList.remove("hide");
 
 }
+
+
+function LectureSon() { document.getElementById("audio").play(); }

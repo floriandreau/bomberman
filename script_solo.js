@@ -7,7 +7,7 @@ cache[1].style.left = "700px";
 let carre = document.getElementById("carre");
 let ennemi = document.getElementsByClassName("ennemi");
 let cadre = document.getElementById("cadre");
-let vie = 3;
+let vie = 300;
 let divVie = document.getElementById("vie");
 let score=0; 
 let div_score=document.getElementById("score");
@@ -34,57 +34,105 @@ function move(element, direction) {
       );
       if (top_element < 650) {
         top_element += 50;
-        for (let index = 0; index < obstacle_i.length; index++) {
-          const element_obs = obstacle_i[index];
-
-         for (let index = 0; index < cassable_i.length; index++) {
-           const element_cass = cassable_i[index];
-           
-           if (casse_tab.length > 0) {
-            for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
-              
-              const element_casse = casse_tab[index_casse];
-              
-              if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-                element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-                obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-                obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-                element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-                element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-                cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-                cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
-                ||
-                element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
-                element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
-                casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
-                casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
-                  top_element -= 50;
+        if (cassable_i.length > 0) {
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+           for (let index = 0; index < cassable_i.length; index++) {
+             const element_cass = cassable_i[index];
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+                  element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+                  cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
+                  ||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    top_element -= 50;
+                    element.style.top = top_element + "px";
+                }
+                else{
                   element.style.top = top_element + "px";
+                }
               }
-              else{
-                element.style.top = top_element + "px";
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+               cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+               cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
+                 top_element -= 50;
+                 element.style.top = top_element + "px";
+             }
+             else{
+               element.style.top = top_element + "px";
+             }
+            }
+            }
+          }
+        }
+        else{
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    top_element -= 50;
+                    element.style.top = top_element + "px";
+                }
+                else{
+                  element.style.top = top_element + "px";
+                }
               }
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop) {
+                 top_element -= 50;
+                 element.style.top = top_element + "px";
+             }
+             else{
+               element.style.top = top_element + "px";
+             }
             }
             
           }
-          else{
-           if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-             element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-             obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-             obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-             element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-             element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-             cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-             cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
-               top_element -= 50;
-               element.style.top = top_element + "px";
-           }
-           else{
-             element.style.top = top_element + "px";
-           }
-          }
-          }
         }
+
       
       }
       break;
@@ -94,56 +142,106 @@ function move(element, direction) {
       );
       if (top_element > 0) {
         top_element -= 50;
-        for (let index = 0; index < obstacle_i.length; index++) {
-          const element_obs = obstacle_i[index]; 
-          
-         for (let index = 0; index < cassable_i.length; index++) {
-          const element_cass = cassable_i[index];
-          if (casse_tab.length > 0) {
-            for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
-              
-              const element_casse = casse_tab[index_casse];
-              
-              if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-                element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-                obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-                obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-                element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-                element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-                cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-                cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
-                ||
-                element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
-                element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
-                casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
-                casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
-                  top_element += 50;
+        if (cassable_i.length > 0) {
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+           for (let index = 0; index < cassable_i.length; index++) {
+             const element_cass = cassable_i[index];
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+                  element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+                  cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
+                  ||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    top_element += 50;
+                    element.style.top = top_element + "px";
+                }
+                else{
                   element.style.top = top_element + "px";
+                }
               }
-              else{
-                element.style.top = top_element + "px";
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+               cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+               cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
+                 top_element += 50;
+                 element.style.top = top_element + "px";
+             }
+             else{
+               element.style.top = top_element + "px";
+             }
+            }
+            }
+          }
+        }
+        else{
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    top_element += 50;
+                    element.style.top = top_element + "px";
+                }
+                else{
+                  element.style.top = top_element + "px";
+                }
               }
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop) {
+                 top_element += 50;
+                 element.style.top = top_element + "px";
+             }
+             else{
+               element.style.top = top_element + "px";
+             }
             }
             
           }
-          else{
-           if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-             element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-             obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-             obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-             element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-             element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-             cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-             cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
-               top_element += 50;
-               element.style.top = top_element + "px";
-           }
-           else{
-             element.style.top = top_element + "px";
-           }
-          }
-        }}
+        }
       }
+      
       break;
     case "droite":
       left_element = parseInt(
@@ -151,55 +249,104 @@ function move(element, direction) {
       );
       if (left_element < 650) {
         left_element += 50;
-        for (let index = 0; index < obstacle_i.length; index++) {
-          const element_obs = obstacle_i[index];
-          
-         for (let index = 0; index < cassable_i.length; index++) {
-          const element_cass = cassable_i[index]; 
-          if (casse_tab.length > 0) {
-            for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
-              
-              const element_casse = casse_tab[index_casse];
-              
-              if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-                element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-                obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-                obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-                element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-                element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-                cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-                cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
-                ||
-                element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
-                element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
-                casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
-                casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
-                  left_element -= 50;
+        if (cassable_i.length > 0) {
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+           for (let index = 0; index < cassable_i.length; index++) {
+             const element_cass = cassable_i[index];
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+                  element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+                  cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
+                  ||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    left_element -= 50;
+                    element.style.left = left_element + "px";
+                }
+                else{
                   element.style.left = left_element + "px";
+                }
               }
-              else{
-                element.style.left = left_element + "px";
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+               cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+               cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
+                left_element -= 50;
+                 element.style.left = left_element + "px";
+             }
+             else{
+               element.style.left = left_element + "px";
+             }
+            }
+            }
+          }
+        }
+        else{
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    left_element -= 50;
+                    element.style.left = left_element + "px";
+                }
+                else{
+                  element.style.left = left_element + "px";
+                }
               }
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop) {
+                left_element -= 50;
+                 element.style.left = left_element + "px";
+             }
+             else{
+               element.style.left = left_element + "px";
+             }
             }
             
           }
-          else{
-           if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-             element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-             obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-             obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-             element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-             element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-             cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-             cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
-               left_element -= 50;
-               element.style.left = left_element + "px";
-           }
-           else{
-             element.style.left = left_element + "px";
-           }
-          }
-        }}
+        }
       }
       break;
     case "gauche":
@@ -208,59 +355,106 @@ function move(element, direction) {
       );
       
       if (left_element > 0) {
-        
         left_element -= 50;
-        for (let index = 0; index < obstacle_i.length; index++) {
-          const element_obs = obstacle_i[index]; 
-          
-          
-         for (let index_cassable = 0; index_cassable < cassable_i.length; index_cassable++) {
-           
-           const element_cass = cassable_i[index_cassable];
-           if (casse_tab.length > 0) {
-             for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
-               
-               const element_casse = casse_tab[index_casse];
-               
-               if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-                 element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-                 obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-                 obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-                 element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-                 element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-                 cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-                 cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
-                 ||
-                 element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
-                 element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
-                 casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
-                 casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
-                   left_element += 50;
-                   element.style.left = left_element + "px";
-               }
-               else{
-                 element.style.left = left_element + "px";
-               }
-             }
+
+        if (cassable_i.length > 0) {
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+           for (let index = 0; index < cassable_i.length; index++) {
+             const element_cass = cassable_i[index];
              
-           }
-           else{
-            if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
-              element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
-              obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
-              obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
-              element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
-              element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
-              cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
-              cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
-                left_element += 50;
-                element.style.left = left_element + "px";
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+                  element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+                  cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop
+                  ||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    left_element += 50;
+                    element.style.left = left_element + "px";
+                }
+                else{
+                  element.style.left = left_element + "px";
+                }
+              }
+              
             }
             else{
-              element.style.left = left_element + "px";
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop ||
+               cassable_i[0].offsetLeft < element.offsetLeft +50 && cassable_i[0].offsetLeft + 50 > element.offsetLeft&&
+               cassable_i[0].offsetTop < element.offsetTop +50 && cassable_i[0].offsetTop + 50 > element.offsetTop) {
+                left_element += 50;
+                 element.style.left = left_element + "px";
+             }
+             else{
+               element.style.left = left_element + "px";
+             }
             }
-           }
-        }}
+            }
+          }
+        }
+        else{
+          for (let index = 0; index < obstacle_i.length; index++) {
+            const element_obs = obstacle_i[index];
+  
+
+             
+             if (casse_tab.length > 0) {
+              for (let index_casse = 0; index_casse < casse_tab.length; index_casse++) {
+                
+                const element_casse = casse_tab[index_casse];
+                
+                if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+                  element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+                  obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+                  obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+                  element_casse.offsetLeft < element.offsetLeft +50 && element_casse.offsetLeft + 50 > element.offsetLeft&&
+                  element_casse.offsetTop < element.offsetTop +50 && element_casse.offsetTop + 50 > element.offsetTop ||
+                  casse_tab[0].offsetLeft < element.offsetLeft +50 && casse_tab[0].offsetLeft + 50 > element.offsetLeft&&
+                  casse_tab[0].offsetTop < element.offsetTop +50 && casse_tab[0].offsetTop + 50 > element.offsetTop) {
+                    left_element += 50;
+                    element.style.left = left_element + "px";
+                }
+                else{
+                  element.style.left = left_element + "px";
+                }
+              }
+              
+            }
+            else{
+             if (element_obs.offsetLeft < element.offsetLeft +50 && element_obs.offsetLeft + 50 > element.offsetLeft&&
+               element_obs.offsetTop < element.offsetTop +50 && element_obs.offsetTop + 50 > element.offsetTop ||
+               obstacle_i[0].offsetLeft < element.offsetLeft +50 && obstacle_i[0].offsetLeft + 50 > element.offsetLeft&&
+               obstacle_i[0].offsetTop < element.offsetTop +50 && obstacle_i[0].offsetTop + 50 > element.offsetTop||
+               element_cass.offsetLeft < element.offsetLeft +50 && element_cass.offsetLeft + 50 > element.offsetLeft&&
+               element_cass.offsetTop < element.offsetTop +50 && element_cass.offsetTop + 50 > element.offsetTop) {
+                left_element += 50;
+                 element.style.left = left_element + "px";
+             }
+             else{
+               element.style.left = left_element + "px";
+             }
+            }
+            
+          }
+        }
       }
       break;
   }
@@ -274,8 +468,8 @@ function move(element, direction) {
 function triple_bombe(element_left, element_top) {
   let bomb = document.createElement("div");
   bomb.classList.add('bombe');
-  left_element = element_left
-  top_element = element_top
+  left_element = element_left;
+  top_element = element_top;
   bomb.style.left = left_element+"px";
   bomb.style.top = top_element+"px";
   cadre.appendChild(bomb);
@@ -371,12 +565,13 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
       point_vie();
     }
     let casse = document.getElementsByClassName("casse");
+    let cassable = document.getElementsByClassName("cassable");
     for (let index = 0; index < casse.length; index++) {
       const casse_touche = casse[index];
       if (element.offsetLeft < casse_touche.offsetLeft +50 && element.offsetLeft + 150 > casse_touche.offsetLeft&&
         element.offsetTop < casse_touche.offsetTop +50 && element.offsetTop + 150 > casse_touche.offsetTop) {
         casse_touche.remove();
-        if (casse.length == 0) {
+        if (casse.length == 0 && cassable.length == 0) {
           let cass_number = nb_cassables(5,30);
           for (let i = 0; i < cass_number; i++) {
             const cassable = document.createElement("div");
@@ -392,7 +587,6 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
         }
       }
     }
-    let cassable = document.getElementsByClassName("cassable");
     for (let index = 0; index < cassable.length; index++) {
       const cassable_touche = cassable[index];
       if (element.offsetLeft < cassable_touche.offsetLeft +50 && element.offsetLeft + 150 > cassable_touche.offsetLeft&&
@@ -403,9 +597,11 @@ function boom(element, index, position_left_bombe, position_top_bombe) {
     }
 
 }, 1000);
+clearTimeout();
 setTimeout(function(){
     element.remove();
-}, 3000);
+}, 2000);
+clearTimeout();
 }
 
 //grosse bombe
@@ -520,7 +716,7 @@ function gros_boom(element, index) {
 }, 1000);
 setTimeout(function(){
     element.remove();
-}, 3000);
+}, 2000);
 }
 
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
@@ -577,7 +773,7 @@ window.addEventListener("keydown", function(event) {
       // code quand on pose la bombe
       if (vie > 0) {
         
-        let bombe_existe = document.getElementsByClassName("bombe");
+        let bombe_existe = document.getElementsByClassName("bombe_un");
         if(bombe_existe.length<3){
           carre.style.background="url(sprite_jeu_js/joueur/bomb.gif)";
           bombe(carre);
@@ -625,15 +821,14 @@ window.addEventListener("keydown", function(event) {
 
         }
         else if(id_bonus == "bonus_3"){
-          for (let index = 0; index < 4; index++) {
-            let triple_azar = ["0", "50", "100", "150", "200", "250", "400", "450", "500", "550", "600", "650"];
+          for (let index = 0; index < 3; index++) {
+            let triple_azar = ["0", "50", "100", "150", "200", "250",, "300", "350", "400", "450", "500", "550", "600", "650"];
             let random_pos = triple_azar[Math.floor(Math.random() * triple_azar.length)];
+            let random_pos_top = triple_azar[Math.floor(Math.random() * triple_azar.length)];
             let left_triple= random_pos;
-            let top_triple= random_pos;
+            let top_triple= random_pos_top;
             triple_bombe(left_triple, top_triple);
             element_bonus.remove();
-
-            
           }
         }
         
@@ -791,56 +986,6 @@ function nb_cassables(min,max){
    cadre.appendChild(cassable);
  }
 
-//Création nuage
-let forme = ["1", "2"];
-let top_ombre=[ "0", "50", "100", "150", "200", "250","300","350", "400", "450", "500", "550"];
-setInterval(function(){
-  let nuage = document.createElement('div');
-  nuage.classList.add("ombre");
-  let random_ombre = forme[Math.floor(Math.random() * forme.length)];
-  let random_top = top_ombre[Math.floor(Math.random() * top_ombre.length)];
-  if (random_ombre == 1) {
-  
-
-    nuage.style.background ="url(nuage.png) round";
-    nuage.style.filter="invert()"
-    nuage.style.opacity="50%"
-    nuage.style.top = random_top+"px";
-    cadre.appendChild(nuage);
-    move_nuage(nuage);
-  }
-  else{
-  
-
-    nuage.style.background ="url(nuage.png) round";
-    nuage.style.filter="invert()"
-    nuage.style.opacity="50%"
-    nuage.style.top = random_top+"px";
-    cadre.appendChild(nuage);
-    move_nuage();
-  }
-}, 17000);
-
-function move_nuage() {
-  setInterval(function(){
-  let nuage = document.getElementsByClassName('ombre');
-  for (let index = 0; index < nuage.length; index++) {
-    const element = nuage[index];
-    
-    if (element.offsetLeft < 700) {
-
-        element.left = element.offsetLeft;
-        element.left += 50;
-        element.style.left = element.left +"px"
-      }
-      else{
-        
-        element.remove();
-      }
-    }
-  }, 2000);
-  
-}
 
 // créer une varriable nb_ennemi = 1
 let nb_ennemi = 1;

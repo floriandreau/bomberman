@@ -168,22 +168,27 @@ margin-top: 10%;
 #solo{
   width: 50%;
   height: 50%;
-  background: red;
+  background: url(solo.png) round;
+  border-bottom: 1px solid white;
 }
 #coop{
   width: 50%;
   height: 50%;
-  background: blue;
+  background: url(coop.png) round;
+  border-bottom: 1px solid white;
+
 }
 #vs{
   width: 50%;
   height: 50%;
-  background: green;
+  background: url(duel2.png) round;
+
 }
 #all{
   width: 50%;
   height: 50%;
-  background: yellow;
+  background: url(duel4.png) round;
+
 }
 
 .ombre{

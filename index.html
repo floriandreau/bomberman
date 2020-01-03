@@ -10,10 +10,10 @@
 </head>
 <body id="body">
   <div id="menu">
-    <section id="solo" onclick="solo()"></section>
-    <section id="coop" onclick="coop()"></section>
-    <section id="vs" onclick="vs()"></section>
-    <section id="all" onclick="vss()"></section>
+    <section id="solo" onclick="solo(), LectureSon()"></section>
+    <section id="coop" onclick="coop(), LectureSon()"></section>
+    <section id="vs" onclick="vs(), LectureSon()"></section>
+    <section id="all" onclick="vss(), LectureSon()"></section>
   </div>
   <div id="cadre" class="hide">
     <div class="cache"></div>
@@ -34,6 +34,13 @@
     <p id="message_vic"> Vous avez perdu, cliquez sur le bouton pour recommencer</p>
     <button onclick="restart()">Recommencer</button>
   </div>
+
+  <video id="audio" controls="" autoplay="" name="media" class="hide">
+
+      <source src="sprite_jeu_js/Cybercity-ASynthwaveMix.mp3" type="audio/mpeg" />
+      
+      </video>
+
   <script src="script.js"></script>
 </body>
 </html>
